@@ -40,8 +40,6 @@
       border: none;
       border-radius: 8px;
       color: white;
-      /* padding: 12px 16px;
-      cursor: pointer; */
     }
     #clearBtn {
       background: #dc3545;
@@ -58,10 +56,7 @@
       transform: translateX(-50%);
       background: #28a745;
       font-size: 24px;
-      /* padding: 5px; */
       border-radius: 50%;
-      /* box-shadow: 0 4px 8px rgba(0,0,0,0.3); */
-      /* z-index: 1000; */
     }
     #speechBtn:active {
       background: #1e7e34;
@@ -75,7 +70,7 @@
   </style>
 </head>
 <body>
-  <textarea id="textArea" placeholder="Type here or use speech..."></textarea>
+  <textarea id="textArea" placeholder="..."></textarea>
   <div class="bottom-bar">
     <button id="clearBtn">x</button>
     <button id="speechBtn">🎤</button>
@@ -108,7 +103,7 @@
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
+      recognition.lang = 'zh-CN';
       recognition.continuous = true;
       recognition.interimResults = true;
 
