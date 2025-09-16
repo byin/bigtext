@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Big Text Communicator</title>
   <style>
     body {
@@ -11,7 +11,6 @@
       display: flex;
       flex-direction: column;
       height: 100vh;
-      position: relative;
     }
     textarea {
       flex: 1;
@@ -23,44 +22,65 @@
       box-sizing: border-box;
       width: 100%;
     }
-    #fullscreenBtn, #clearBtn, #speechBtn {
-      position: absolute;
-      bottom: 20px;
-      padding: 12px 16px;
-      font-size: 16px;
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+      box-sizing: border-box;
+    }
+    .bottom-bar button {
+      width: 40px;
+      height: 40px;
       border: none;
       border-radius: 8px;
       color: white;
-      cursor: pointer;
-    }
-    #fullscreenBtn {
-      right: 20px;
-      background: #007bff;
-    }
-    #fullscreenBtn:active {
-      background: #0056b3;
+      /* padding: 12px 16px;
+      cursor: pointer; */
     }
     #clearBtn {
-      left: 20px;
       background: #dc3545;
     }
     #clearBtn:active {
       background: #a71d2a;
     }
     #speechBtn {
-      left: 100px;
+      width: 60px;
+      height: 60px;
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       background: #28a745;
+      font-size: 24px;
+      /* padding: 5px; */
+      border-radius: 50%;
+      /* box-shadow: 0 4px 8px rgba(0,0,0,0.3); */
+      /* z-index: 1000; */
     }
     #speechBtn:active {
       background: #1e7e34;
+    }
+    #fullscreenBtn {
+      background: #007bff;
+    }
+    #fullscreenBtn:active {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
   <textarea id="textArea" placeholder="Type here or use speech..."></textarea>
-  <button id="clearBtn">x</button>
-  <button id="speechBtn">🎤</button>
-  <button id="fullscreenBtn">⛶</button>
+  <div class="bottom-bar">
+    <button id="clearBtn">x</button>
+    <button id="speechBtn">🎤</button>
+    <button id="fullscreenBtn">⛶</button>
+  </div>
 
   <script>
     const textarea = document.getElementById('textArea');
@@ -88,7 +108,7 @@
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
-      recognition.lang = 'zh-CN';
+      recognition.lang = 'en-US';
       recognition.continuous = true;
       recognition.interimResults = true;
 
