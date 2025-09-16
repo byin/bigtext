@@ -96,6 +96,12 @@
     clearBtn.addEventListener('click', () => {
       textarea.value = '';
       textarea.focus();
+      if (listening && recognition) {
+        recognition.stop();
+        speechBtn.textContent = '🎤';
+        listening = false;
+        textarea.disabled = false;
+      }
     });
 
     // Web Speech API for speech-to-text
@@ -118,6 +124,12 @@
       recognition.onerror = (event) => {
         console.error('Speech recognition error', event);
       };
+
+      recognition.onend = () => {
+        if (listening) {
+          recognition.start(); // restart if unexpectedly stopped
+        }
+      };
     } else {
       alert('Speech Recognition not supported in this browser.');
     }
@@ -129,10 +141,12 @@
         recognition.start();
         speechBtn.textContent = '🛑';
         listening = true;
+        textarea.disabled = true;
       } else {
         recognition.stop();
         speechBtn.textContent = '🎤';
         listening = false;
+        textarea.disabled = false;
       }
     });
   </script>
