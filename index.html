@@ -115,8 +115,8 @@
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognition = new SpeechRecognition();
       recognition.lang = 'zh-CN';
-      recognition.continuous = true;
-      recognition.interimResults = true;
+    //   recognition.continuous = true;
+    //   recognition.interimResults = true;
 
       recognition.onresult = (event) => {
         let transcript = '';
